@@ -46,6 +46,6 @@ dont forget to change database options in .env file
 
 
 
-## thanks you Oecophyllaa for the template 
+## thanks you @Oecophyllaa for the template 
 
 
