@@ -11,6 +11,7 @@ use App\Http\Controllers\Dashboard\ServiceController;
 use App\Http\Controllers\Dashboard\RequestController;
 use App\Http\Controllers\Dashboard\MyOrderController;
 use App\Http\Controllers\Dashboard\ProfileController;
+use App\Http\Controllers\Reputation\ReputationController;
 
 
 /*
@@ -24,12 +25,26 @@ use App\Http\Controllers\Dashboard\ProfileController;
 |
 */
 
-Route::get('detail_booking/{id}', [LandingController::class, 'detail_booking'])->name('detail.booking.landing');
-Route::get('booking/{id}', [LandingController::class, 'booking'])->name('booking.landing');
-Route::get('detail/{id}', [LandingController::class, 'detail'])->name('detail.landing');
-Route::get('explore', [LandingController::class, 'explore'])->name('explore.landing');
-Route::post('detail/{id}/offer', [LandingController::class, 'store'])->name('offer.landing');
-//Route::get('explore', [LandingController::class, 'index'])->name('explore.landing');
+
+
+
+
+
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('detail_booking/{id}', [LandingController::class, 'detail_booking'])->name('detail.booking.landing');
+	Route::get('booking/{id}', [LandingController::class, 'booking'])->name('booking.landing');
+	Route::get('detail/{id}', [LandingController::class, 'detail'])->name('detail.landing');
+	Route::get('explore', [LandingController::class, 'explore'])->name('explore.landing');
+	Route::post('detail/{id}/offer', [LandingController::class, 'store'])->name('offer.landing');
+	//Route::get('explore', [LandingController::class, 'index'])->name('explore.landing');
+	Route::get('member/request/reputation', [RequestController::class, 'reputation'])->name('reputation.create');
+	Route::post('member/request/reputation', [RequestController::class, 'reputation_store'])->name('reputation.add');
+
+});
+
 
 
 Route::resource('/', LandingController::class);
@@ -51,6 +66,8 @@ Route::group(['prefix' => 'member', 'as' => 'member.', 'middleware' => ['auth:sa
 	//Route::get('approve_request/{id}', [RequestController::class, 'approve'])->name('approve.request');
 	Route::resource('request', RequestController::class);
 	
+	//reputation
+	//Route::resource('reputation', ReputationController::class);
 	
 
 	// my order
@@ -60,6 +77,13 @@ Route::group(['prefix' => 'member', 'as' => 'member.', 'middleware' => ['auth:sa
 	// profile
 	Route::get('delete_photo', [ProfileController::class, 'delete'])->name('delete.photo.profile');
 	Route::resource('profile', ProfileController::class);
+});
+
+Route::group(['prefix' => 'reputation', 'as' => 'reputations.', 'middleware' => 'auth'], function () {
+    Route::get('/show', [ReputationController::class, 'index'])->name('index');
+    Route::get('taking/{id}', [ReputationController::class, 'taking'])->name('get');
+    Route::post('taking/{id}/get/money', [ReputationController::class, 'store'])->name('money');
+    // Diğer rotalar...
 });
 
 

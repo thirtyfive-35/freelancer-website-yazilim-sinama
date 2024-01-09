@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 use App\Models\RequestInfo;
-
+use App\Models\ReputationInfo;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -47,7 +47,7 @@ class RequestController extends Controller
 public function store(Request $request)
 {
     $data = $request->validate([
-		'price' => 'required|numeric',
+		'price' => 'required|numeric|min:0',
 		'hizmet_title' => 'required|string',
 		'delivery_date' => 'required|string',
 		'hizmet_describe' => 'required|string',
@@ -123,4 +123,44 @@ public function store(Request $request)
 	public function approve($id)
 	{
 	}
+
+
+
+
+
+	public function reputation(){
+
+		return view('pages.dashboard.request.reputation');
+	}
+
+	public function reputation_store(Request $request){
+		
+    $data = $request->validate([
+		'reputation_price' => 'required|numeric|min:0',
+		'reputation_title' => 'required|string',
+		'target_username'=> 'required|string',
+		'delivery_date' => 'required|string',
+	]);
+	
+	// Veritabanına kayıt işlemleri
+	$service = new ReputationInfo();
+	$service->user_id = auth()->user()->id; // Authenticated kullanıcının ID'sini alır
+	$service->reputation_price = $data['reputation_price'];
+	$service->target_username = $data['target_username'];
+	$service->reputation_title = $data['reputation_title'];
+	$service->delivery_date = $data['delivery_date'];
+
+	$service->save();
+
+
+    return redirect()->route('member.request.index')
+        ->with('success', 'Service created successfully');
+	}
+
+
+
+
+
+
+
 }

@@ -10,6 +10,7 @@
           <h2 class="mt-8 mb-1 text-2xl font-semibold text-gray-700">
             Overviews
           </h2>
+          <h1>Balance: {{ Auth::user()->wallet }} USD</h1>
 
           <p class="text-sm text-gray-400">
             Monthly Reports

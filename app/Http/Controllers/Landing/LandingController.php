@@ -40,10 +40,6 @@ class LandingController extends Controller
 
 	 public function store(Request $request, $id)
 	 {
-		 $validatedData = $request->validate([
-			 'offer_price' => 'required|numeric',
-		 ]);
-	 
 		 // İlgili request_info'yu bulun
 		 $requestInfo = RequestInfo::find($id);
 	 
@@ -52,7 +48,13 @@ class LandingController extends Controller
 			 return redirect()->back()->with('error', 'Request Info not found!');
 		 }
 	 
-			 $userId = auth()->user()->id;
+		 $userId = auth()->user()->id;
+	 
+		 // Eğer formdan gelen user_id ve $service->user_id eşit değilse kaydet
+		 if ($userId != $request->user_id) {
+			 $validatedData = $request->validate([
+				 'offer_price' => 'required|numeric|min:' . $requestInfo->price,
+			 ]);
 	 
 			 // Offer tablosuna kaydedin
 			 Offer::create([
@@ -63,7 +65,13 @@ class LandingController extends Controller
 	 
 			 // Diğer işlemleri yapın (örneğin, başka bir sayfaya yönlendirme)
 			 return redirect()->route('explore.landing')->with('success', 'Offer created successfully!');
+		 } else {
+			 // Eğer eşitse bir şey yapın, örneğin hata mesajı gönderin
+			 return redirect()->back()->with('error', 'You cannot make an offer on your own service!');
+		 }
 	 }
+	 
+
 
 
 
@@ -126,6 +134,7 @@ class LandingController extends Controller
 
 	public function detail($id)
 	{
+		
 		$service = RequestInfo::findOrFail($id);
 		return view('pages.landing.detail',compact('service'));
 	}

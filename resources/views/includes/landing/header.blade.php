@@ -21,7 +21,7 @@
           <a href="{{ route('index') }}" class="block nav-link {{ request()->is('/') ? 'active font-medium' : 'text-serv-text' }}">Home</a>
           <a href="{{ route('explore.landing') }}"
             class="block nav-link {{ request()->is('explore') || request()->is('explore/*') ? 'active font-medium' : 'text-serv-text' }}">Explore</a>
-          <a href="#" class="block nav-link text-serv-text">How It Works</a>
+          <a href="{{ route('reputations.index') }}" class="block nav-link text-serv-text">Show Reputation</a>
           <a href="#" class="block nav-link text-serv-text">Stories</a>
           <a href="#" class="block nav-link text-serv-text">Tips</a>
 

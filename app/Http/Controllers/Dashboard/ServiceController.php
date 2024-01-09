@@ -110,7 +110,6 @@ class ServiceController extends Controller
 
     // Teklifi kabul etmek için 'active' değerini true, 'order_status' değerini false, 'delivery_status' değerini true yapın
     $offer->update([
-        'active' => true,
         'order_status' => false,
         'delivery_status' => true,
     ]);

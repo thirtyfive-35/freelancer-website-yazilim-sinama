@@ -8,7 +8,7 @@
             <div class="grid w-full gap-5 px-10 mx-auto md:grid-cols-12">
                 <div class="col-span-8">
                     <h2 class="mt-8 mb-1 text-2xl font-semibold text-gray-700">
-                        My Services
+                        My Request
                     </h2>
                     <p class="text-sm text-gray-400">
                         {{ $services->count() }} Total Services
@@ -19,6 +19,10 @@
                         <a href="{{ route('member.request.create') }}"
                             class="inline-block px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-button">
                             + Add Service
+                        </a>
+                        <a href="{{ route('reputation.create') }}"
+                            class="inline-block px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-button">
+                            + Add reputation
                         </a>
                     </div>
                 </div>

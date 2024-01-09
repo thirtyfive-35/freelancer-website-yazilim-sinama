@@ -28,42 +28,11 @@
       <main class="p-4 lg:col-span-8 md:col-span-12">
         <!-- details heading -->
         <div class="details-heading">
-          <h1 class="text-2xl font-semibold">{{ $service->hizmet_title }}</h1>
+          <h1 class="text-2xl font-semibold">{{ $service->reputation_title }}</h1>
           <div class="my-3">
             @include('components.landing.rating')
           </div>
-        </div>
-        <div class="p-3 my-4 bg-gray-100 rounded-lg image-gallery" x-data="gallery()">
-          <img :src="featured" alt="" class="rounded-lg cursor-pointer w-100" data-lity>
-          <div class="flex overflow-x-scroll hide-scroll-bar dragscroll">
-            <div class="flex mt-2 flex-nowrap">
-              <img :class="{ 'border-4 border-serv-button': active === 1 }"
-                @click="changeThumbnail('https://source.unsplash.com/_SgRNwAVNKw/1600x900/',1)"
-                src="{{ url('https://source.unsplash.com/_SgRNwAVNKw/250x160/') }}" alt=""
-                class="inline-block mr-2 rounded-lg cursor-pointer w-36">
-              <img :class="{ 'border-4 border-serv-button': active === 2 }"
-                @click="changeThumbnail('https://source.unsplash.com/GXNo-OJynTQ/1600x900/',2)"
-                src="{{ url('https://source.unsplash.com/GXNo-OJynTQ/250x160/') }}" alt=""
-                class="inline-block mr-2 rounded-lg cursor-pointer w-36">
-              <img :class="{ 'border-4 border-serv-button': active === 3 }"
-                @click="changeThumbnail('https://source.unsplash.com/x-HpilsdKEk/1600x900/',3)"
-                src="{{ url('https://source.unsplash.com/x-HpilsdKEk/250x160/') }}" alt=""
-                class="inline-block mr-2 rounded-lg cursor-pointer w-36">
-              <img :class="{ 'border-4 border-serv-button': active === 4 }"
-                @click="changeThumbnail('https://source.unsplash.com/hLit2zL-Dhk/1600x900/',4)"
-                src="{{ url('https://source.unsplash.com/hLit2zL-Dhk/250x160/') }}" alt=""
-                class="inline-block mr-2 rounded-lg cursor-pointer w-36">
-              <img :class="{ 'border-4 border-serv-button': active === 5 }"
-                @click="changeThumbnail('https://source.unsplash.com/i1VQZsU86ok/1600x900/',5)"
-                src="{{ url('https://source.unsplash.com/i1VQZsU86ok/250x160/') }}" alt=""
-                class="inline-block mr-2 rounded-lg cursor-pointer w-36">
-              <img :class="{ 'border-4 border-serv-button': active === 6 }"
-                @click="changeThumbnail('https://source.unsplash.com/iEiUITs149M/1600x900/',6)"
-                src="{{ url('https://source.unsplash.com/iEiUITs149M/250x160/') }}" alt=""
-                class="inline-block mr-2 rounded-lg cursor-pointer w-36">
-            </div>
-          </div>
-        </div>
+
         <div class="content">
           <div x-data="{ tab: window.location.hash ? window.location.hash.substring(1) : 'description' }" id="tab_wrapper">
             <!-- The tabs navigation -->
@@ -71,12 +40,6 @@
               <a class="inline-block px-8 py-2 my-2 mr-2 font-medium rounded-xl"
                 :class="{ 'bg-serv-bg text-white': tab === 'description', 'bg-serv-services-bg text-serv-bg': tab !== 'description' }"
                 @click.prevent="tab = 'description'; window.location.hash = 'description'" href="#">Description</a>
-              <a class="inline-block px-8 py-2 my-2 mr-2 font-medium rounded-xl"
-                :class="{ 'bg-serv-bg text-white': tab === 'seller', 'bg-serv-services-bg text-serv-bg': tab !== 'seller' }"
-                @click.prevent="tab = 'seller'; window.location.hash = 'seller'" href="#">About The Seller</a>
-              <a class="inline-block px-8 py-2 my-2 mr-2 font-medium rounded-xl"
-                :class="{ 'bg-serv-bg text-white': tab === 'reviews', 'bg-serv-services-bg text-serv-bg': tab !== 'reviews' }"
-                @click.prevent="tab = 'reviews'; window.location.hash = 'reviews'" href="#">Reviews</a>
             </nav>
 
             <!-- The tabs content -->
@@ -84,24 +47,36 @@
               <h2 class="text-xl font-semibold">About This <span class="text-serv-button">Services</span></h2>
               <div class="mt-4 mb-8 content-description">
                 <p>
-                {{ $service->hizmet_title }}
+                {{ $service->reputation_title }}
                 </p>
               </div>
               <h3 class="my-4 text-lg font-semibold">Service Describe</h3>
               <ul class="mb-4 list-check">
-                <li class="pl-10 my-2">{{ $service->hizmet_describe }}</li>
+                <div>
+                    <h1>GitHub Takip Ödülleri</h1>
+
+                    <h2>Proje Tanımı</h2>
+                    <p>
+                        Bu proje, GitHub üzerindeki kullanıcıların belirli bir bağlantıdaki projeyi takip etmelerini sağlayarak ödüller kazanmalarına odaklanmaktadır.
+                        Proje sahibi, belirli bir GitHub reposunun takip edilmesi karşılığında kullanıcılara ödül vermek istemektedir.
+                    </p>
+
+                    <h2>Nasıl Çalışır?</h2>
+                    <ol>
+                        <li><strong>Proje Bağlantısı:</strong> İlk adım, kullanıcıların bu projeyi takip etmelerini sağlamak için aşağıdaki bağlantıyı kullanmalarıdır:
+                            <br>
+                            https://github.com/{{ $service->target_username }}
+                        </li>
+                        <li><strong>GitHub Takip:</strong> Kullanıcılar, sağlanan bağlantıyı ziyaret edip projeyi GitHub üzerinde takip ederler.</li>
+                        <li><strong>Ödüller:</strong> Takip işlemi başarıyla tamamlandığında, kullanıcılara belirli bir miktar ödül verilir. Bu ödül, proje sahibi tarafından belirlenen bir miktar dolar veya başka bir ödeme birimi olabilir.</li>
+                        <li>
+                            <strong>Kullanıcı Adını Gönder:</strong> Takip işlemi tamamlandıktan sonra, GitHub kullanıcı adınızı aşağıdaki alana girin ve "Send Username" butonuna basarak ödül talebinizi gönderin.
+                            <br>
+                        </li>
+                    </ol>
+                </div>
               </ul>
               <h3 class="my-4 text-lg font-semibold">Delivery date: {{ $service->delivery_date }}</h3>
-              <h3 class="my-4 text-lg font-semibold">System and technology</h3>
-              <ul class="mb-4 list-check">
-                <li class="pl-10 my-2">{{ $service->hizmet_sistem }}</li>
-              </ul>
-              <h3 class="my-4 text-lg font-semibold">customer notes</h3>
-              <ul class="mb-4 list-check">
-                <li class="pl-10 my-2">{{ $service->hizmet_not}}</li>
-              </ul>
-              
-              
             </div>
             <div x-show.transition.duration.500ms="tab === 'seller'" class="leading-8 text-md">
               <h2 class="mb-4 text-xl font-semibold">About <span class="text-serv-button">Me</span></h2>
@@ -201,47 +176,34 @@
               1 Revision Limit
             </div>
           </div>
-          <div class="px-4 pt-4 pb-2 features-list">
-            <ul class="mb-4 text-sm list-check">
-              <li class="pl-10 my-4">3 Pages</li>
-              <li class="pl-10 my-4">Customized Design</li>
-              <li class="pl-10 my-4">Responsive Design</li>
-              <li class="pl-10 my-4">3 Plugins/Extensions</li>
-              <li class="pl-10 my-4">E-Commerce Functionality</li>
-            </ul>
-          </div>
           <div class="px-4">
             <table class="w-full mb-4">
               <tr>
                 <td class="text-sm leading-7 text-serv-text">
-                  Price starts from:
+                  Get the 2 $ 
                 </td>
                 <td class="mb-4 text-xl font-semibold text-right text-serv-button">
-                {{ $service->price }} $
+                {{ $service->reputation_price }} $
                 </td>
               </tr>
 
             </table>
-            <form action="{{ route('offer.landing', ['id' => $service->id]) }}" method="POST">
+            <form action="{{ route('reputations.money', ['id' => $service->id]) }}" method="POST">
               @csrf
               <!-- Diğer form elemanları buraya eklenebilir -->
 
               <!-- Gizli user_id input elemanı -->
               <input type="hidden" id="user_id" name="user_id" value="{{ $service->user_id }}">
 
-              <!-- Kullanıcıdan fiyatı girmesini isteyen input -->
-              <label for="offer_price">Enter the offer price:</label>
-              <input type="text" id="offer_price" name="offer_price" required>
+              <!-- Kullanıcıdan github kullanıcı adını girmesini isteyen input -->
+              <label for="client_username">Enter the github username:</label>
+              <input type="text" id="client_username" name="client_username" required>
 
               <!-- Teklif vermek için buton -->
               <button type="submit" class="ml-4 px-4 py-2 text-lg font-semibold text-center text-white bg-serv-button rounded-xl">
-                  Submit Offer
+                  Send Username
               </button>
           </form>
-
-
-
-
       </aside>
     </div>
   </section>
