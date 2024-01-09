@@ -45,6 +45,7 @@ Start the server
 dont forget to change database options in .env file
 
 
-## thanks you Oecophyllaa for the tamplate 
+
+## thanks you Oecophyllaa for the template 
 
 
