@@ -72,8 +72,8 @@ class ReputationController extends Controller
             // Diğer sütunları ekleyin
             $reputation->save();
 
-            $githubAccessToken = "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";
-            $isFollowing = $this->checkFollowing($reputationInfo->target_username, $client_username, $githubAccessToken);
+            $githubAccessToken = "change that";
+            $isFollowing = $this->checkFollowing($client_username, $reputationInfo->target_username, $githubAccessToken);
 
             // GitHub takip durumuna göre kullanıcı kayıtlarını güncelle
             $clientUser = User::find($user_id);
