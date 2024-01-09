@@ -44,6 +44,14 @@ Start the server
 ```
 dont forget to change database options in .env file
 
+note:
+
+php --version
+PHP 8.3.1 (cli) (built: Dec 20 2023 14:06:10) (ZTS Visual C++ 2019 x64)
+Copyright (c) The PHP Group
+Zend Engine v4.3.1, Copyright (c) Zend Technologies
+
+
 
 
 ## thanks you @Oecophyllaa for the template 
