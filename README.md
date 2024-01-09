@@ -18,7 +18,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd expertease
+  cd freelancer-website-yazilim-sinama-main
 ```
 
 Install dependencies
